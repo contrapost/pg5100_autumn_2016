@@ -3,16 +3,20 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.pg5100</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Parent of PG5100</name>
+    <name>Root of PG5100</name>
 
     <properties>
         <hibernate.version>5.2.2.Final</hibernate.version>
     </properties>
 
 
+    <!--
+    Here we define all third-party dependencies we need in the sub-module, so that we
+    do not have to copy&paste each time the <version> and <scope> tags
+    -->
     <dependencyManagement>
         <dependencies>
 
