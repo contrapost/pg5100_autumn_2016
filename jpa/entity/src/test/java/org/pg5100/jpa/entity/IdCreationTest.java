@@ -35,9 +35,14 @@ public class IdCreationTest {
             //abort the transaction if there was any exception
             tx.rollback();
             fail();//fail the test
+        } finally {
+            //in any case, make sure to close the opened resources
+            em.close();
+            factory.close();
         }
 
         //id should have now be set
         assertNotNull(user01.getId());
+        System.out.println("GENERATED ID: "+user01.getId());
     }
 }
