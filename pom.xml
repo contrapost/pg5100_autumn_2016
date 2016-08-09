@@ -8,6 +8,10 @@
     <packaging>pom</packaging>
     <name>Root of PG5100</name>
 
+    <modules>
+        <module>jpa</module>
+    </modules>
+
     <properties>
         <hibernate.version>5.2.2.Final</hibernate.version>
     </properties>
@@ -59,6 +63,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
+                <!-- JUnit 5 has come out this year, but still not in a stable / widely supported state -->
                 <version>4.12</version>
                 <scope>test</scope>
             </dependency>

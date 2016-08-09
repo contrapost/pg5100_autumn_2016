@@ -1,0 +1,43 @@
+package org.pg5100.jpa.entity;
+
+import org.junit.Test;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+import static org.junit.Assert.*;
+
+public class IdCreationTest {
+
+    @Test
+    public void testIdPersistence(){
+
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("DB");//same name as in persistence.xml
+        EntityManager em = factory.createEntityManager();//it works as a cache/buffer until we commit a transaction
+
+        User01 user01 = new User01();
+        user01.setName("AName");
+        user01.setSurname("ASurname");
+
+        // by default, no id, until data committed to the database
+        assertNull(user01.getId());
+
+        //committing data to database needs to be inside a transaction
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        try{
+            em.persist(user01);
+            tx.commit();
+        } catch (Exception e){
+            //abort the transaction if there was any exception
+            tx.rollback();
+            fail();//fail the test
+        }
+
+        //id should have now be set
+        assertNotNull(user01.getId());
+    }
+}
