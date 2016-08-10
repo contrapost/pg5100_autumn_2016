@@ -29,8 +29,11 @@
             <!-- specify we are connecting to a H2 database -->
             <property name="hibernate.connection.url" value="jdbc:h2:./target/db"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <!-- This will make sure we use a new database at each new connection (ie EntityManagerFactory),
-                 deleting all existing data -->
+            <!--
+            This will make sure we use a new database at each new connection (ie EntityManagerFactory),
+            deleting all existing data. The schema is created based on the @Entity classes
+            on the classpath
+            -->
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <!-- This does show on the console the SQL statements executed by Hibernate -->
             <property name="hibernate.show_sql" value="true"/>

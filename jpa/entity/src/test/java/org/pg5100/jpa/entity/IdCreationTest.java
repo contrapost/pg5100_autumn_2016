@@ -29,7 +29,15 @@ public class IdCreationTest {
         tx.begin();
 
         try{
+            /*
+                The following is actually executing this SQL statement:
+
+                insert into User01 (name, surname, id) values (?, ?, ?)
+
+             */
             em.persist(user01);
+
+            //there can be several operations on the "cache" EntityManager before we actually commit the transaction
             tx.commit();
         } catch (Exception e){
             //abort the transaction if there was any exception
