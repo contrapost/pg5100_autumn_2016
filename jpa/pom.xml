@@ -15,6 +15,7 @@
         <module>entity</module>
         <module>table</module>
         <module>embedded</module>
+        <module>attribute</module>
     </modules>
 
 
