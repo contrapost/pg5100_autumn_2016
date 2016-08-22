@@ -16,6 +16,8 @@
         <module>table</module>
         <module>embedded</module>
         <module>attribute</module>
+        <module>relationship</module>
+        <module>manager</module>
     </modules>
 
 
