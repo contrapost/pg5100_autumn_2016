@@ -18,6 +18,7 @@
         <module>attribute</module>
         <module>relationship</module>
         <module>manager</module>
+        <module>jpql</module>
     </modules>
 
 
