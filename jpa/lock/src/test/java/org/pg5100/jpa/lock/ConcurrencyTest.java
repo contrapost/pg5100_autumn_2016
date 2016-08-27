@@ -24,7 +24,6 @@ public class ConcurrencyTest {
 
     @After
     public void tearDown() {
-        //em.close();
         factory.close();
     }
 

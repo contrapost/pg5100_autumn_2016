@@ -19,6 +19,7 @@
         <module>relationship</module>
         <module>manager</module>
         <module>jpql</module>
+        <module>lock</module>
     </modules>
 
 
