@@ -173,7 +173,8 @@ public class ConcurrencyTest {
         Class<BaseCounter> klass = BaseCounter.class;
         Long id = createNewCounter(klass);
 
-        //no need to retry, as no transaction should fail
+        //no need to retry, as no transaction should fail.
+        //Note: a pessimistic lock does throw an exception if waiting too long (ie a timeout, default 1 second)
         boolean retryIfFails = false;
 
         int delta = runInParallel(id, LockModeType.PESSIMISTIC_WRITE, retryIfFails, (em, i) -> em.find(klass, i) );

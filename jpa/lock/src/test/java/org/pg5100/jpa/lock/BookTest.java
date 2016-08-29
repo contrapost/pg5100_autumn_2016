@@ -33,7 +33,7 @@ public class BookTest {
         x.setTitle("A new title");
 
         //before this transaction is committed, add book to the shelf
-        SyncExecutor executor = new SyncExecutor(factory);
+        TransactionExecutor executor = new TransactionExecutor(factory);
         executor.syncExe(t -> {
             //note, here the book does not get modified
             Book y = t.find(Book.class, book, type);
@@ -89,8 +89,8 @@ public class BookTest {
             Note: in this example, you might think a business case would be to prevent
             two transactions each one adding the same book to a different shelf.
             Yes, that would do, but unnecessary, as the second transaction to complete
-            would fail anyway due to constraint violation of OneToMany (instead of
-            ManyToMany)
+            would fail anyway due to constraint violation of OneToMany (instead it would
+            had work for ManyToMany)
          */
         boolean added = isAdded(LockModeType.OPTIMISTIC_FORCE_INCREMENT);
         assertFalse(added);

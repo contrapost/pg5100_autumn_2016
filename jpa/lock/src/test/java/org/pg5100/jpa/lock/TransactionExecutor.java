@@ -5,18 +5,28 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import java.util.function.Consumer;
 
-public class SyncExecutor {
+public class TransactionExecutor {
 
     private final  EntityManagerFactory factory;
 
-    public SyncExecutor(EntityManagerFactory factory) {
+    public TransactionExecutor(EntityManagerFactory factory) {
         this.factory = factory;
     }
 
     public void syncExe(Consumer<EntityManager> command) {
+        Thread t = createThread(command);
+        startAndWait(t);
+    }
 
-        //create a thread
-        Thread t = new Thread(() ->{
+    public Thread asyncExe(Consumer<EntityManager> command){
+        Thread t = createThread(command);
+        t.start();
+        return t;
+    }
+
+    private Thread createThread(Consumer<EntityManager> command) {
+
+        return new Thread(() ->{
             EntityManager em = factory.createEntityManager();
             EntityTransaction tx = em.getTransaction();
 
@@ -30,8 +40,6 @@ public class SyncExecutor {
             }
             em.close();
         });
-
-       startAndWait(t);
     }
 
     private void startAndWait(Thread t){
