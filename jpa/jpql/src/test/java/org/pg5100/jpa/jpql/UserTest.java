@@ -268,14 +268,12 @@ public class UserTest {
 
 
     @Test
-    public void testBulkDelete(){
-
+    public void testBulkDeleteAll(){
         Query all = em.createNamedQuery(User.GET_ALL);
         assertEquals(4, all.getResultList().size());
 
         //useful when needing to delete/update many entries at the same time
-        Query delete = em.createQuery("delete from User u where u.address.country = :country ");
-        delete.setParameter("country", "Norway");
+        Query delete = em.createQuery("delete from User u");
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -287,7 +285,68 @@ public class UserTest {
             fail();
         }
 
-        assertEquals(1, all.getResultList().size()); //3 should had been deleted
+        assertEquals(0, all.getResultList().size()); //all should had been deleted
+    }
+
+    @Test
+    public void testBulkDelete(){
+
+        Query all = em.createNamedQuery(User.GET_ALL);
+        assertEquals(4, all.getResultList().size());
+
+        String country = "Norway";
+
+        //useful when needing to delete/update many entries at the same time
+        Query delete = em.createQuery("delete from User u where u.address.country = :country ");
+        delete.setParameter("country", country);
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        try {
+            //as it modifies the DB, we need to explicitly wrap it inside a transaction
+            delete.executeUpdate();
+            fail();
+        } catch (Exception e){
+            tx.rollback();
+            /*
+                expected, because it would leave the DB in a inconsistent state, as there would
+                be some non-Norwegian users that have at least one Norwegian friend, and that link
+                would be broken if bulk delete gets executed
+             */
+        }
+
+        assertEquals(4, all.getResultList().size()); //rolledback, nothing should had been deleted so far
+
+        /*
+            to bulk delete the elements in the 'friends' list,
+            can't use JPQL (as far as I know...) but can always use native SQL.
+
+            Note: the relation table linking a manyToMany relation between X and Y will be called X_Y, which
+            is User_User in our case
+
+            Note2: there might be different ways to efficiently do this query, which might also depends on
+             the actual database dialect
+
+            Note3: "select 1" (ie just return '1' value for each row) is only done for efficiency, as in the EXISTS
+             we just want to check if the return of the SELECT is non-empty
+         */
+        Query deletedRelation = em.createNativeQuery(
+                "delete from User_User k where EXISTS(select 1 from User w where k.friends_id=w.id and w.country=?1) ");
+        deletedRelation.setParameter(1, country);
+
+
+        tx = em.getTransaction();
+        tx.begin();
+        try {
+
+            deletedRelation.executeUpdate();
+            delete.executeUpdate();
+        } catch (Exception e){
+            tx.rollback();
+            fail();
+        }
+
+        assertEquals(1, all.getResultList().size()); // the 3 Norwegian users should had been deleted now
     }
 
     @Test
