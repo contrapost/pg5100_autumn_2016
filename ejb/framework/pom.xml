@@ -2,17 +2,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>ejb</artifactId>
+    <artifactId>framework</artifactId>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>org.pg5100</groupId>
-        <artifactId>root</artifactId>
+        <artifactId>ejb</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>
-        <module>framework</module>
+        <module>injection</module>
+        <module>proxy</module>
     </modules>
 
 
