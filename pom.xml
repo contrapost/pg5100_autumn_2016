@@ -10,6 +10,7 @@
 
     <modules>
         <module>jpa</module>
+        <module>ejb</module>
     </modules>
 
     <properties>
