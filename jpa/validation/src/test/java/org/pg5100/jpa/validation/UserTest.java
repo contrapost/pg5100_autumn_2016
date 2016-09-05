@@ -133,6 +133,24 @@ public class UserTest {
     }
 
     @Test
+    public void testBlankName(){
+
+        User user = getAValidUser();
+        user.setName("      ");
+
+        /*
+            There is no constraint on the Entity that a name should
+            not be blank, ie all empty spaces.
+            Would need a regular expression avoiding spaces, or
+            a custom one
+         */
+        assertFalse(hasViolations(user));
+        assertTrue(persistInATransaction(user));
+    }
+
+
+
+    @Test
     public void testMiddleName(){
 
         User user = getAValidUser();
