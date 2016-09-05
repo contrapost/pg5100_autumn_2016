@@ -32,6 +32,12 @@
                 <scope>provided</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.glassfish.main.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
+                <version>4.1.1</version>
+            </dependency>
+
             <!-- JPA / Hibernate / Database -->
             <dependency>
                 <groupId>org.hibernate.javax.persistence</groupId>
