@@ -4,6 +4,7 @@ package org.pg5100.ejb.stateless;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 public class UserBean {
@@ -31,5 +32,11 @@ public class UserBean {
     public boolean isRegistered(String userId){
         User user = em.find(User.class, userId);
         return user != null;
+    }
+
+    public long getNumberOfUsers(){
+        Query query = em.createQuery("select count(u) from User u");
+        long n = (Long) query.getSingleResult();
+        return n;
     }
 }

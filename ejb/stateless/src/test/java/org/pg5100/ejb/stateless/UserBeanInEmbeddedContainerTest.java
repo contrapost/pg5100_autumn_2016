@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -68,5 +69,17 @@ public class UserBeanInEmbeddedContainerTest {
         bean.registerNewUser(userId,"a","b");
 
         assertTrue(bean.isRegistered(userId));
+    }
+
+    @Test
+    public void testQuery(){
+        UserBean bean = getEJB(UserBean.class);
+
+        bean.registerNewUser("0","a","b");
+        bean.registerNewUser("1","a","b");
+        bean.registerNewUser("2","a","b");
+
+        long n = bean.getNumberOfUsers();
+        assertEquals(3, n);
     }
 }
