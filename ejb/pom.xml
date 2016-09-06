@@ -14,6 +14,7 @@
     <modules>
         <module>framework</module>
         <module>stateless</module>
+        <module>singleton</module>
     </modules>
 
 

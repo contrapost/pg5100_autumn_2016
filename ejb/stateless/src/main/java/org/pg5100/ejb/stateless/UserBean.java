@@ -6,6 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+/*
+    A stateless EJB should not keep any internal state, eg fields, as the
+    JEE container might create thousands of instances, each time serving
+    potentially a different one.
+ */
 @Stateless
 public class UserBean {
 
