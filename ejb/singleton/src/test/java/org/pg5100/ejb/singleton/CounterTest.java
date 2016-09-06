@@ -48,8 +48,7 @@ public class CounterTest {
          */
 
         return ShrinkWrap.create(JavaArchive.class)
-                .addClasses(Counter.class, A.class, B.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+                .addClasses(Counter.class, A.class, B.class);
     }
 
 
