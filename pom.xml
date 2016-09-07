@@ -11,6 +11,7 @@
     <modules>
         <module>jpa</module>
         <module>ejb</module>
+        <module>jta</module>
     </modules>
 
     <properties>
@@ -110,14 +111,6 @@
                 <version>2.53.0</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <!-- embedded JEE GlassFish container -->
-                <groupId>org.glassfish.main.extras</groupId>
-                <artifactId>glassfish-embedded-all</artifactId>
-                <version>4.1.1</version>
-                <scope>test</scope>
-            </dependency>
-
 
             <!-- Arquilian, needed for integration testing of EJB -->
             <dependency>
@@ -148,6 +141,13 @@
                 <scope>test</scope>
             </dependency>
 
+
+            <dependency>
+                <!-- embedded JEE GlassFish container -->
+                <groupId>org.glassfish.main.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
+                <version>4.1.1</version>
+            </dependency>
 
 
             <!-- Misc -->
