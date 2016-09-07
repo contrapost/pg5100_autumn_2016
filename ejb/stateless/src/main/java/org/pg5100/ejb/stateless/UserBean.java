@@ -5,6 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.validation.constraints.NotNull;
 
 /*
     A stateless EJB should not keep any internal state, eg fields, as the
@@ -21,7 +22,7 @@ public class UserBean {
     public UserBean(){}
 
     //all methods in a EJB are wrapped in a transaction, with automated rollback if exceptions
-    public void registerNewUser(String userId, String name, String surname){
+    public void registerNewUser(@NotNull String userId, @NotNull String name, @NotNull String surname){
         if(isRegistered(userId)){
             return;
         }
@@ -34,7 +35,7 @@ public class UserBean {
         em.persist(user);
     }
 
-    public boolean isRegistered(String userId){
+    public boolean isRegistered(@NotNull String userId){
         User user = em.find(User.class, userId);
         return user != null;
     }

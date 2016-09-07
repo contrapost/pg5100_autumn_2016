@@ -2,6 +2,7 @@ package org.pg5100.ejb.stateless;
 
 import org.junit.*;
 
+import javax.ejb.EJBException;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.NamingException;
@@ -9,9 +10,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class UserBeanInEmbeddedContainerTest {
 
@@ -30,7 +29,9 @@ public class UserBeanInEmbeddedContainerTest {
             see page 231 in Chapter 7 and
             http://arquillian.org/blog/2012/04/13/the-danger-of-embedded-containers/
 
-            In generate, better to avoid the embedded containers
+            In generate, better to avoid the embedded containers,
+            although I will use them in some simple examples just to
+            simplify the execution of the tests
          */
 
         Map<String, Object> properties = new HashMap<>();
@@ -81,5 +82,18 @@ public class UserBeanInEmbeddedContainerTest {
 
         long n = bean.getNumberOfUsers();
         assertEquals(3, n);
+    }
+
+    @Test
+    public void testNullValue(){
+        UserBean bean = getEJB(UserBean.class);
+
+        try {
+            //In EJB, the @NotNull are checked at runtime by the JEE container
+            bean.registerNewUser("0", "a", null);
+            fail();
+        } catch (EJBException e){
+            //expected
+        }
     }
 }
