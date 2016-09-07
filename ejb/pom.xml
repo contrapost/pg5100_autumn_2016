@@ -15,6 +15,7 @@
         <module>framework</module>
         <module>stateless</module>
         <module>singleton</module>
+        <module>multithreading</module>
     </modules>
 
 
