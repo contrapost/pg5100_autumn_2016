@@ -16,6 +16,7 @@
         <module>stateless</module>
         <module>singleton</module>
         <module>multithreading</module>
+        <module>time</module>
     </modules>
 
 
