@@ -147,7 +147,7 @@ public class UserTest {
         Query query = em.createQuery(
                 "select distinct u.name from User u");
 
-        List<Message> messages = query.getResultList();
+        List<String> messages = query.getResultList();
 
         //recall: 2 users have same name (ie B)
         assertEquals(3, messages.size());
@@ -341,6 +341,7 @@ public class UserTest {
 
             deletedRelation.executeUpdate();
             delete.executeUpdate();
+            tx.commit();
         } catch (Exception e){
             tx.rollback();
             fail();
