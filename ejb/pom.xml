@@ -17,6 +17,7 @@
         <module>singleton</module>
         <module>multithreading</module>
         <module>stateful</module>
+        <module>async</module>
         <module>time</module>
     </modules>
 
