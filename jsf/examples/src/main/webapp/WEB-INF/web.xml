@@ -5,7 +5,6 @@
 
   <display-name>Base example with only static files</display-name>
 
-  <!-- see http://www.javatpoint.com/welcome-file-list -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
