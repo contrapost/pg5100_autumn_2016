@@ -12,6 +12,7 @@
         <module>jpa</module>
         <module>ejb</module>
         <module>jta</module>
+        <module>jsf</module>
     </modules>
 
     <properties>
