@@ -1,4 +1,4 @@
-package org.pg5100.jsf.example.test;
+package org.pg5100.jsf.examples.test;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

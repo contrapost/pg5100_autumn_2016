@@ -1,9 +1,10 @@
-package org.pg5100.jsf.example.test;
+package org.pg5100.jsf.examples.test;
 
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -18,12 +19,24 @@ public abstract class SeleniumTestBase {
 
     private static WebDriver driver;
 
-    private static boolean tryToSetGeckoIfExists(Path path){
+    private static boolean tryToSetGeckoIfExists(String property, Path path){
         if(Files.exists(path)){
-            System.setProperty("webdriver.gecko.driver", path.toAbsolutePath().toString());
+            System.setProperty(property, path.toAbsolutePath().toString());
             return true;
         }
         return false;
+    }
+
+    private static void setupDriverExecutable(String executableName, String property){
+        String homeDir = System.getProperty("user.home");
+
+        //first try Linux/Mac executable
+        if(! tryToSetGeckoIfExists(property, Paths.get(homeDir,executableName))){
+            //then check if on Windows
+            if(! tryToSetGeckoIfExists(property, Paths.get(homeDir,executableName+".exe"))){
+                fail("Cannot locate the "+executableName+" in your home directory "+homeDir);
+            }
+        }
     }
 
     private static WebDriver getFirefoxDriver(){
@@ -34,17 +47,13 @@ public abstract class SeleniumTestBase {
 
             https://developer.mozilla.org/en-US/docs/Mozilla/QA/Marionette/WebDriver
             https://github.com/mozilla/geckodriver/releases
+
+            However, it looks like this driver is still unstable, at least on Mac.
+            Note: there was a big change in Firefox 47, which at the time completely
+            broke the firefox driver, and the new "marionette" became the new one
          */
 
-        String homeDir = System.getProperty("user.home");
-        String executableName = "geckodriver";
-
-        if(! tryToSetGeckoIfExists(Paths.get(homeDir,executableName))){
-            if(! tryToSetGeckoIfExists(Paths.get(homeDir,executableName+".exe"))){
-                fail("Cannot locate the "+executableName+" in your home directory "+homeDir);
-            }
-        }
-
+        setupDriverExecutable("geckodriver", "webdriver.gecko.driver");
 
         DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
         desiredCapabilities.setCapability("marionette", true);
@@ -53,12 +62,26 @@ public abstract class SeleniumTestBase {
         return  new FirefoxDriver(desiredCapabilities);
     }
 
+    private static WebDriver getChromeDriver(){
+
+        /*
+            Need to have Chrome (eg version 53.x) and the Chrome Driver (eg 2.24),
+            whose executable should be saved directly under your home directory
+
+            see https://sites.google.com/a/chromium.org/chromedriver/getting-started
+         */
+
+        setupDriverExecutable("chromedriver", "webdriver.chrome.driver");
+
+        return new ChromeDriver();
+    }
+
     @BeforeClass
     public static void init() throws InterruptedException {
 
-        driver = getFirefoxDriver(); //need Selenium 3.x, but still giving few issues (at least on Mac)
+        //driver = getFirefoxDriver(); //need Selenium 3.x, but still giving few issues (at least on Mac)
+        driver = getChromeDriver();
 
-        //TODO: need to configure Chrome
 
         /*
             When the integration tests in this class are run, it might be

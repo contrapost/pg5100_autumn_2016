@@ -2,7 +2,7 @@ package org.pg5100.jsf.examples.exp01;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.pg5100.jsf.example.test.SeleniumTestBase;
+import org.pg5100.jsf.examples.test.SeleniumTestBase;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
