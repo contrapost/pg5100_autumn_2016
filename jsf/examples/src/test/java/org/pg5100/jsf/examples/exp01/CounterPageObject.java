@@ -19,7 +19,7 @@ public class CounterPageObject extends PageObject{
     }
 
     public void toStartingPage(){
-        getDriver().get(getBaseUrl()+"/exp01/exp01.jsf");
+        getDriver().get(getBaseUrl()+"/ex01/ex01.jsf");
         waitForPageToLoad();
 
         //make sure we start from a 0 counter
