@@ -37,20 +37,34 @@ public class SingletonTest {
 
 
     @Test
-    public void testOnce(){
+    public void testOnceSingleton(){
 
         assumeTrue(singleton.getInternalX() == 0);
 
         checkInternalState();
+    }
+
+    @Test
+    public void testASecondTimeSingleton(){
+
+        assumeTrue(singleton.getInternalX() == 0);
+
+        checkInternalState();
+    }
+
+    @Test
+    public void testOnceDB(){
+
+        assumeTrue(singleton.readDB() == 0);
+
         checkDB();
     }
 
     @Test
-    public void testASecondTime(){
+    public void testASecondTimeDB(){
 
-        assumeTrue(singleton.getInternalX() == 0);
+        assumeTrue(singleton.readDB() == 0);
 
-        checkInternalState();
         checkDB();
     }
 
