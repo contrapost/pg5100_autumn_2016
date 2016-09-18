@@ -1,4 +1,4 @@
-package org.pg5100.jsf.examples.exp01;
+package org.pg5100.jsf.examples.ex01;
 
 import org.junit.Before;
 import org.junit.Test;

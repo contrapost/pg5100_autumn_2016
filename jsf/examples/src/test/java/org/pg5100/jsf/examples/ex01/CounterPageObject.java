@@ -1,4 +1,4 @@
-package org.pg5100.jsf.examples.exp01;
+package org.pg5100.jsf.examples.ex01;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -28,11 +28,8 @@ public class CounterPageObject extends PageObject{
         }
     }
 
-    /*
-        We need a method to check if we are on the right page, eg to check we were
-        not redirected to an error message page, or if we followed the wrong link
-     */
 
+    @Override
     public boolean isOnPage(){
         return getDriver().getTitle().contains("simple counter");
     }

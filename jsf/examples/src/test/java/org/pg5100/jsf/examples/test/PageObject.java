@@ -23,6 +23,13 @@ public abstract class PageObject {
         this.driver = driver;
     }
 
+    /*
+        Is the browser currently on the page represented by this Page Object?
+        We need a method to check if we are on the right page, eg to check we were
+        not redirected to an error message page, or if we followed the wrong link
+     */
+    public abstract boolean isOnPage();
+
     protected WebDriver getDriver(){
         return driver;
     }

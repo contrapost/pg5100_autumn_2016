@@ -1,4 +1,4 @@
-package org.pg5100.jsf.examples.exp01;
+package org.pg5100.jsf.examples.ex01;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
