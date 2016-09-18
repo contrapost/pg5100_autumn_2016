@@ -18,6 +18,7 @@
         <module>multithreading</module>
         <module>stateful</module>
         <module>async</module>
+        <module>query</module>
         <module>arquillian</module>
         <module>callback</module>
         <module>time</module>
