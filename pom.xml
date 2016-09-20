@@ -245,6 +245,41 @@
                 </plugin>
 
                 <!--
+                    Maven phases:
+                    https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference
+
+                    Main ones:
+
+                    *clean*
+                    compile
+                    process-test-classes
+                    test
+                    package
+                    pre-integration-test
+                    integration-test
+                    post-integration-test
+                    verify
+                    install
+                    deploy
+
+                    apart from *clean*, when executing one of those phases (eg "mvn test"), all previous
+                    phases are executed as well.
+
+                    Note:
+
+                    process-test-classes: this is when we download/unpack Wildfly
+                    test: unit tests (*Test.java) are executed
+                    package: creation of jar/war files
+                    pre-integration-test: we start Wildfly for the integration tests
+                    integration-test: execute all *IT.java tests
+                    post-integration-test: stop Wildfly
+                    install: copy the jar/war files into your ~/.m2 folder (like any other dependency)
+
+                    clean: delete everything in the "target" folders
+                -->
+
+
+                <!--
                    Plugin configuration to automatically start WildFly before integration tests are
                    started, and then stop it once all are finished
                 -->
