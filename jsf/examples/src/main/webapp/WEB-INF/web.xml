@@ -26,7 +26,7 @@
   <!--
     Here, we tell which requested URL are going to be handled by the JSF servlet,
     ie all URLs ending with ".faces" and with ".jsf".
-    Note: need two have two servlet-mapping, ie it is bit redundant.
+    Note: need to have two servlet-mapping, ie it is bit redundant.
     Furthermore, make sure that the servlet-name is the same as the one
     used before in the <servlet> definition
   -->
