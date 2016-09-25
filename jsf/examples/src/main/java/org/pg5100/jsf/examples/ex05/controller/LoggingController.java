@@ -46,8 +46,7 @@ public class LoggingController implements Serializable{
         boolean valid = userEJB.login(formUserName, formPassword);
         if(valid){
             registeredUser = formUserName;
-            //return "home.xhtml?faces-redirect=true";
-            return "ex05.jsf?faces-redirect=true";
+            return "ex05.jsf";
         } else {
             return "login.jsf";
         }
@@ -57,9 +56,9 @@ public class LoggingController implements Serializable{
         boolean registered = userEJB.createUser(formUserName,formPassword);
         if(registered){
             registeredUser = formUserName;
-            return "ex05.jsf?faces-redirect=true";
+            return "ex05.jsf";
         } else {
-            return "login.xhtml";
+            return "login.jsf";
         }
     }
 
