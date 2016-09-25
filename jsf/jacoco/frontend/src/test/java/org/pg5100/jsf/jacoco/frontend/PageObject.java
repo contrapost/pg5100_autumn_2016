@@ -1,4 +1,4 @@
-package org.pg5100.jsf.examples.test;
+package org.pg5100.jsf.jacoco.frontend;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -35,7 +35,7 @@ public abstract class PageObject {
     }
 
     protected String getBaseUrl(){
-        return "http://localhost:8080/examples";
+        return "http://localhost:8080/jacoco";
     }
 
     protected Boolean waitForPageToLoad() {

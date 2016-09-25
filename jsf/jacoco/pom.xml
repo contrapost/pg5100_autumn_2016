@@ -2,20 +2,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>jsf</artifactId>
+    <artifactId>jacoco</artifactId>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>org.pg5100</groupId>
-        <artifactId>root</artifactId>
+        <artifactId>jsf</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <!--
+        Project divided in 3 modules:
+
+        backend: contains Entity and EJB
+        frontend: depends on backend, and contains JSF controllers and XHTML pages
+        report: used to aggregate coverage results from the other 2 modules
+    -->
+
+
     <modules>
-        <module>base</module>
-        <module>examples</module>
-        <module>crawler</module>
-        <module>jacoco</module>
+        <module>backend</module>
+        <module>frontend</module>
+        <module>report</module>
     </modules>
 
 
