@@ -110,7 +110,7 @@ public abstract class SeleniumTestBase {
 
 
     @Before
-    public void startFromInitialPage(){
+    public void checkIfWildflyIsRunning(){
 
         //if for any reason WildFly is not running any more, do not fail the tests
         assumeTrue("Wildfly is not up and running", JBossUtil.isJBossUpAndRunning());
