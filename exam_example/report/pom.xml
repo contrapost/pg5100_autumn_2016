@@ -8,7 +8,7 @@
 
     <parent>
         <groupId>org.pg5100</groupId>
-        <artifactId>exame_example</artifactId>
+        <artifactId>exam_example</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
